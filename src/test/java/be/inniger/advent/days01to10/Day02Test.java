@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day2Test {
+public class Day02Test {
 
-  private final DailyProblem problem = new Day2();
+  private final DailyProblem problem = new Day02();
 
   @Test
   public void validateFirstSampleInputs() {

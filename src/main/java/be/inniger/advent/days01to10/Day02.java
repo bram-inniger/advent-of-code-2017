@@ -7,7 +7,7 @@ import java.util.List;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day2 implements DailyProblem {
+public class Day02 implements DailyProblem {
 
   @Override
   public int solveFirst(List<String> inputs) {
