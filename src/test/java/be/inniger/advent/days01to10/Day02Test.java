@@ -10,6 +10,7 @@ import be.inniger.advent.DailyProblem;
 
 public class Day02Test {
 
+  private static final String FILE_NAME = "02.txt";
   private final DailyProblem problem = new Day02();
 
   @Test
@@ -24,7 +25,7 @@ public class Day02Test {
 
   @Test
   public void validateFirstSolution() {
-    assertThat(problem.solveFirst(read("02.txt")))
+    assertThat(problem.solveFirst(read(FILE_NAME)))
         .isEqualTo(36766);
   }
 }
