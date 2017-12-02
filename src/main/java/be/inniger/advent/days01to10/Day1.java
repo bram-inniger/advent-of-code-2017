@@ -1,13 +1,16 @@
 package be.inniger.advent.days01to10;
 
-import be.inniger.advent.util.DailyProblem;
+import java.util.List;
 
-public class Day1 extends DailyProblem {
+import be.inniger.advent.DailyProblem;
+
+public class Day1 implements DailyProblem {
 
   @Override
-  public String solveFirst(String input) {
+  public String solveFirst(List<String> inputs) {
     long sum = 0L;
 
+    String input = inputs.get(0);
     input = input + input.charAt(0);
     for (int i = 0; i < input.length() - 1; i++) {
       if (input.charAt(i) == input.charAt(i + 1)) {
@@ -19,9 +22,10 @@ public class Day1 extends DailyProblem {
   }
 
   @Override
-  public String solveSecond(String input) {
+  public String solveSecond(List<String> inputs) {
     long sum = 0L;
 
+    String input = inputs.get(0);
     for (int i = 0; i < input.length() / 2; i++) {
       if (input.charAt(i) == input.charAt(i + input.length() / 2)) {
         sum += Integer.parseInt("" + input.charAt(i));
