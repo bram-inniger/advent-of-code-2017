@@ -7,8 +7,8 @@ import be.inniger.advent.DailyProblem;
 public class Day1 implements DailyProblem {
 
   @Override
-  public String solveFirst(List<String> inputs) {
-    long sum = 0L;
+  public int solveFirst(List<String> inputs) {
+    int sum = 0;
 
     String input = inputs.get(0);
     input = input + input.charAt(0);
@@ -18,12 +18,12 @@ public class Day1 implements DailyProblem {
       }
     }
 
-    return "" + sum;
+    return sum;
   }
 
   @Override
-  public String solveSecond(List<String> inputs) {
-    long sum = 0L;
+  public int solveSecond(List<String> inputs) {
+    int sum = 0;
 
     String input = inputs.get(0);
     for (int i = 0; i < input.length() / 2; i++) {
@@ -32,6 +32,6 @@ public class Day1 implements DailyProblem {
       }
     }
 
-    return "" + 2 * sum;
+    return 2 * sum;
   }
 }

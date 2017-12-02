@@ -18,6 +18,6 @@ public class Day2Test {
         "7 5 3",
         "2 4 6 8"
     )))
-        .isEqualTo("18");
+        .isEqualTo(18);
   }
 }

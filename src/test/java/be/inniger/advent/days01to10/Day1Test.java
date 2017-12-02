@@ -14,33 +14,33 @@ public class Day1Test {
   @Test
   public void validateFirstSampleInputs() {
     assertThat(problem.solveFirst(singletonList("1122")))
-        .isEqualTo("3");
+        .isEqualTo(3);
 
     assertThat(problem.solveFirst(singletonList("1111")))
-        .isEqualTo("4");
+        .isEqualTo(4);
 
     assertThat(problem.solveFirst(singletonList("1234")))
-        .isEqualTo("0");
+        .isEqualTo(0);
 
     assertThat(problem.solveFirst(singletonList("91212129")))
-        .isEqualTo("9");
+        .isEqualTo(9);
   }
 
   @Test
   public void validateSecondSampleInputs() {
     assertThat(problem.solveSecond(singletonList("1212")))
-        .isEqualTo("6");
+        .isEqualTo(6);
 
     assertThat(problem.solveSecond(singletonList("1221")))
-        .isEqualTo("0");
+        .isEqualTo(0);
 
     assertThat(problem.solveSecond(singletonList("123425")))
-        .isEqualTo("4");
+        .isEqualTo(4);
 
     assertThat(problem.solveSecond(singletonList("123123")))
-        .isEqualTo("12");
+        .isEqualTo(12);
 
     assertThat(problem.solveSecond(singletonList("12131415")))
-        .isEqualTo("4");
+        .isEqualTo(4);
   }
 }

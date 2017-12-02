@@ -10,8 +10,8 @@ import be.inniger.advent.DailyProblem;
 public class Day2 implements DailyProblem {
 
   @Override
-  public String solveFirst(List<String> inputs) {
-    return "" + inputs.stream()
+  public int solveFirst(List<String> inputs) {
+    return inputs.stream()
         .map(string -> string.split("\\s+"))
         .map(this::minMaxDifference)
         .reduce(Integer::sum)
@@ -19,7 +19,7 @@ public class Day2 implements DailyProblem {
   }
 
   @Override
-  public String solveSecond(List<String> inputs) {
+  public int solveSecond(List<String> inputs) {
     throw new UnsupportedOperationException();
   }
 
