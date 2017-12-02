@@ -10,6 +10,6 @@ public class Main {
   private static final Path INPUTS = Paths.get("src", "main", "resources", "inputs");
 
   public static void main(String... args) {
-    new Day1().solveFirst(INPUTS.resolve("01.txt"));
+    new Day1().solveSecond(INPUTS.resolve("01.txt"));
   }
 }

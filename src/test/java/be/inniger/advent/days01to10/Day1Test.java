@@ -2,7 +2,6 @@ package be.inniger.advent.days01to10;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import be.inniger.advent.util.DailyProblem;
@@ -26,22 +25,21 @@ public class Day1Test {
         .isEqualTo("9");
   }
 
-  @Ignore
   @Test
   public void validateSecondSampleInputs() {
-    assertThat(problem.solveFirst("1212"))
+    assertThat(problem.solveSecond("1212"))
         .isEqualTo("6");
 
-    assertThat(problem.solveFirst("1221"))
+    assertThat(problem.solveSecond("1221"))
         .isEqualTo("0");
 
-    assertThat(problem.solveFirst("123425"))
+    assertThat(problem.solveSecond("123425"))
         .isEqualTo("4");
 
-    assertThat(problem.solveFirst("123123"))
+    assertThat(problem.solveSecond("123123"))
         .isEqualTo("12");
 
-    assertThat(problem.solveFirst("12131415"))
+    assertThat(problem.solveSecond("12131415"))
         .isEqualTo("4");
   }
 }
