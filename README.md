@@ -11,7 +11,7 @@ Tests verifying all solutions (and sample inputs) can be found under ["Test"](sr
 
 ## How to run
 
-    $ git clone https://github.com/bram-inniger/traffic.git Advent
+    $ git clone https://github.com/bram-inniger/advent.git Advent
     $ cd Advent
     $ mvn clean package && java -jar target/advent.jar
 
