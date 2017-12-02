@@ -3,8 +3,10 @@ package be.inniger.advent.days01to10;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 import be.inniger.advent.DailyProblem;
 
@@ -12,16 +14,20 @@ public class Day02 implements DailyProblem {
 
   @Override
   public int solveFirst(List<String> inputs) {
-    return inputs.stream()
-        .map(this::tokenize)
-        .map(this::maxMinDifference)
-        .reduce(Integer::sum)
-        .orElseThrow(IllegalArgumentException::new);
+    return solve(inputs, this::maxMinDifference);
   }
 
   @Override
   public int solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
+    return solve(inputs, this::evenDivisorDivision);
+  }
+
+  private int solve(List<String> inputs, Function<List<Integer>, Integer> mapper) {
+    return inputs.stream()
+        .map(this::tokenize)
+        .map(mapper)
+        .reduce(Integer::sum)
+        .orElseThrow(IllegalArgumentException::new);
   }
 
   private List<Integer> tokenize(String line) {
@@ -32,12 +38,35 @@ public class Day02 implements DailyProblem {
   }
 
   private int maxMinDifference(List<Integer> values) {
-    return toIntStream(values).max().orElseThrow(IllegalArgumentException::new) -
-        toIntStream(values).min().orElseThrow(IllegalArgumentException::new);
+    return reduce(values, Math::max) -
+        reduce(values, Math::min);
   }
 
-  private IntStream toIntStream(List<Integer> values) {
+  private int reduce(List<Integer> values, IntBinaryOperator reducer) {
     return values.stream()
-        .mapToInt(Integer::intValue);
+        .mapToInt(Integer::intValue)
+        .reduce(reducer)
+        .orElseThrow(IllegalArgumentException::new);
+  }
+
+  private int evenDivisorDivision(List<Integer> values) {
+    return values.stream()
+        .map(value -> divideByEvenDivisor(value, values))
+        .filter(Optional::isPresent)
+        .map(Optional::get)
+        .findAny()
+        .orElseThrow(IllegalArgumentException::new);
+  }
+
+  private Optional<Integer> divideByEvenDivisor(int dividend, List<Integer> divisors) {
+    return divisors.stream()
+        .filter(divisor -> dividesEvenly(dividend, divisor))
+        .map(divisor -> dividend / divisor)
+        .findAny();
+  }
+
+  private boolean dividesEvenly(int dividend, int divisor) {
+    return dividend != divisor &&
+        (dividend / divisor) * divisor == dividend;
   }
 }

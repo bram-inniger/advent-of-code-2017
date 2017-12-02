@@ -28,4 +28,20 @@ public class Day02Test {
     assertThat(problem.solveFirst(read(FILE_NAME)))
         .isEqualTo(36766);
   }
+
+  @Test
+  public void validateSecondSampleInputs() {
+    assertThat(problem.solveSecond(asList(
+        "5 9 2 8",
+        "9 4 7 3",
+        "3 8 6 5"
+    )))
+        .isEqualTo(9);
+  }
+
+  @Test
+  public void validateSecondSolution() {
+    assertThat(problem.solveSecond(read(FILE_NAME)))
+        .isEqualTo(261);
+  }
 }
