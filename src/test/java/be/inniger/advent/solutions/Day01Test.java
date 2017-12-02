@@ -1,4 +1,4 @@
-package be.inniger.advent.days01to10;
+package be.inniger.advent.solutions;
 
 import static be.inniger.advent.util.InputFileReader.read;
 import static java.util.Collections.singletonList;

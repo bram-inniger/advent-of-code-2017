@@ -1,4 +1,4 @@
-package be.inniger.advent.days01to10;
+package be.inniger.advent.solutions;
 
 import java.util.List;
 import java.util.function.BiPredicate;
