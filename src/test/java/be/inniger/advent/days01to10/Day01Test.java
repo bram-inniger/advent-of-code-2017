@@ -10,6 +10,7 @@ import be.inniger.advent.DailyProblem;
 
 public class Day01Test {
 
+  private static final String FILE_NAME = "01.txt";
   private final DailyProblem problem = new Day01();
 
   @Test
@@ -25,6 +26,12 @@ public class Day01Test {
 
     assertThat(problem.solveFirst(singletonList("91212129")))
         .isEqualTo(9);
+  }
+
+  @Test
+  public void validateFirstSolution() {
+    assertThat(problem.solveFirst(read(FILE_NAME)))
+        .isEqualTo(1102);
   }
 
   @Test
@@ -46,14 +53,8 @@ public class Day01Test {
   }
 
   @Test
-  public void validateFirstSolution() {
-    assertThat(problem.solveFirst(read("01.txt")))
-        .isEqualTo(1102);
-  }
-
-  @Test
   public void validateSecondSolution() {
-    assertThat(problem.solveSecond(read("01.txt")))
+    assertThat(problem.solveSecond(read(FILE_NAME)))
         .isEqualTo(1076);
   }
 }
