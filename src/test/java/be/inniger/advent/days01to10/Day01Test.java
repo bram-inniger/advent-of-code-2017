@@ -1,5 +1,6 @@
 package be.inniger.advent.days01to10;
 
+import static be.inniger.advent.util.InputFileReader.read;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,5 +43,17 @@ public class Day01Test {
 
     assertThat(problem.solveSecond(singletonList("12131415")))
         .isEqualTo(4);
+  }
+
+  @Test
+  public void validateFirstSolution() {
+    assertThat(problem.solveFirst(read("01.txt")))
+        .isEqualTo(1102);
+  }
+
+  @Test
+  public void validateSecondSolution() {
+    assertThat(problem.solveSecond(read("01.txt")))
+        .isEqualTo(1076);
   }
 }
