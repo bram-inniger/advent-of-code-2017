@@ -1,23 +1,22 @@
 package be.inniger.advent.solutions;
 
-import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.stream.IntStream;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day01 implements DailyProblem {
+public class Day01 implements DailyProblem<String> {
 
   @Override
-  public int solveFirst(List<String> inputs) {
-    return solve(inputs.get(0),
-        (input, i) -> input.charAt(i) == input.charAt((i + 1) % input.length()));
+  public int solveFirst(String input) {
+    return solve(input,
+        (str, i) -> str.charAt(i) == str.charAt((i + 1) % str.length()));
   }
 
   @Override
-  public int solveSecond(List<String> inputs) {
-    return solve(inputs.get(0),
-        (input, i) -> input.charAt(i) == input.charAt((i + input.length() / 2) % input.length()));
+  public int solveSecond(String input) {
+    return solve(input,
+        (str, i) -> str.charAt(i) == str.charAt((i + str.length() / 2) % str.length()));
   }
 
   private int solve(String input, BiPredicate<String, Integer> predicate) {

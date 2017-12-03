@@ -6,12 +6,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import be.inniger.advent.DailyProblem;
-
 public class Day02Test {
 
   private static final String FILE_NAME = "02.txt";
-  private final DailyProblem problem = new Day02();
+  private final Day02 problem = new Day02();
 
   @Test
   public void validateFirstSampleInputs() {

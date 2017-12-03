@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day02 implements DailyProblem {
+public class Day02 implements DailyProblem<List<String>> {
 
   @Override
   public int solveFirst(List<String> inputs) {

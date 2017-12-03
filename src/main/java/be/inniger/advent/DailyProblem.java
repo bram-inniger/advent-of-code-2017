@@ -1,10 +1,8 @@
 package be.inniger.advent;
 
-import java.util.List;
+public interface DailyProblem<T> {
 
-public interface DailyProblem {
+  int solveFirst(T input);
 
-  int solveFirst(List<String> inputs);
-
-  int solveSecond(List<String> inputs);
+  int solveSecond(T input);
 }

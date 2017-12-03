@@ -1,60 +1,57 @@
 package be.inniger.advent.solutions;
 
 import static be.inniger.advent.util.InputFileReader.read;
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import be.inniger.advent.DailyProblem;
-
 public class Day01Test {
 
   private static final String FILE_NAME = "01.txt";
-  private final DailyProblem problem = new Day01();
+  private final Day01 problem = new Day01();
 
   @Test
   public void validateFirstSampleInputs() {
-    assertThat(problem.solveFirst(singletonList("1122")))
+    assertThat(problem.solveFirst("1122"))
         .isEqualTo(3);
 
-    assertThat(problem.solveFirst(singletonList("1111")))
+    assertThat(problem.solveFirst("1111"))
         .isEqualTo(4);
 
-    assertThat(problem.solveFirst(singletonList("1234")))
+    assertThat(problem.solveFirst("1234"))
         .isEqualTo(0);
 
-    assertThat(problem.solveFirst(singletonList("91212129")))
+    assertThat(problem.solveFirst("91212129"))
         .isEqualTo(9);
   }
 
   @Test
   public void validateFirstSolution() {
-    assertThat(problem.solveFirst(read(FILE_NAME)))
+    assertThat(problem.solveFirst(read(FILE_NAME).get(0)))
         .isEqualTo(1102);
   }
 
   @Test
   public void validateSecondSampleInputs() {
-    assertThat(problem.solveSecond(singletonList("1212")))
+    assertThat(problem.solveSecond("1212"))
         .isEqualTo(6);
 
-    assertThat(problem.solveSecond(singletonList("1221")))
+    assertThat(problem.solveSecond("1221"))
         .isEqualTo(0);
 
-    assertThat(problem.solveSecond(singletonList("123425")))
+    assertThat(problem.solveSecond("123425"))
         .isEqualTo(4);
 
-    assertThat(problem.solveSecond(singletonList("123123")))
+    assertThat(problem.solveSecond("123123"))
         .isEqualTo(12);
 
-    assertThat(problem.solveSecond(singletonList("12131415")))
+    assertThat(problem.solveSecond("12131415"))
         .isEqualTo(4);
   }
 
   @Test
   public void validateSecondSolution() {
-    assertThat(problem.solveSecond(read(FILE_NAME)))
+    assertThat(problem.solveSecond(read(FILE_NAME).get(0)))
         .isEqualTo(1076);
   }
 }
