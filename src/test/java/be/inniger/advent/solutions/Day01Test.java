@@ -11,6 +11,7 @@ public class Day01Test extends DailyTest {
 
   private final Day01 problem = new Day01();
 
+  @Override
   @Test
   public void validateFirstSampleInputs() {
     assertThat(problem.solveFirst("1122"))
@@ -26,12 +27,14 @@ public class Day01Test extends DailyTest {
         .isEqualTo(9);
   }
 
+  @Override
   @Test
   public void validateFirstSolution() {
     assertThat(problem.solveFirst(read(FILE_NAME).get(0)))
         .isEqualTo(1102);
   }
 
+  @Override
   @Test
   public void validateSecondSampleInputs() {
     assertThat(problem.solveSecond("1212"))
@@ -50,6 +53,7 @@ public class Day01Test extends DailyTest {
         .isEqualTo(4);
   }
 
+  @Override
   @Test
   public void validateSecondSolution() {
     assertThat(problem.solveSecond(read(FILE_NAME).get(0)))

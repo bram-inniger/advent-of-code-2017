@@ -12,6 +12,7 @@ public class Day03Test extends DailyTest {
 
   private final Day03 problem = new Day03();
 
+  @Override
   @Test
   public void validateFirstSampleInputs() {
     assertThat(problem.solveFirst(1))
@@ -27,12 +28,14 @@ public class Day03Test extends DailyTest {
         .isEqualTo(31);
   }
 
+  @Override
   @Test
   public void validateFirstSolution() {
     assertThat(problem.solveFirst(parseInt(read(FILE_NAME).get(0))))
         .isEqualTo(438);
   }
 
+  @Override
   @Test
   public void validateSecondSampleInputs() {
     // These don't make sense, as the actual method calculates the next value surpassing the given input
@@ -52,6 +55,7 @@ public class Day03Test extends DailyTest {
 //        .isEqualTo(5);
   }
 
+  @Override
   @Test
   public void validateSecondSolution() {
     assertThat(problem.solveSecond(parseInt(read(FILE_NAME).get(0))))

@@ -12,6 +12,7 @@ public class Day04Test extends DailyTest {
 
   private final Day04 problem = new Day04();
 
+  @Override
   @Test
   public void validateFirstSampleInputs() {
     assertThat(problem.solveFirst(singletonList("aa bb cc dd ee")))
@@ -24,12 +25,14 @@ public class Day04Test extends DailyTest {
         .isEqualTo(1);
   }
 
+  @Override
   @Test
   public void validateFirstSolution() {
     assertThat(problem.solveFirst(read(FILE_NAME)))
         .isEqualTo(383);
   }
 
+  @Override
   @Test
   public void validateSecondSampleInputs() {
     assertThat(problem.solveSecond(singletonList("abcde fghij")))
@@ -48,6 +51,7 @@ public class Day04Test extends DailyTest {
         .isEqualTo(0);
   }
 
+  @Override
   @Test
   public void validateSecondSolution() {
     assertThat(problem.solveSecond(read(FILE_NAME)))
