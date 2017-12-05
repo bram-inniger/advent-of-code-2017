@@ -6,9 +6,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-public class Day05Test {
+import be.inniger.advent.DailyTest;
 
-  private static final String FILE_NAME = "05.txt";
+public class Day05Test extends DailyTest {
+
   private final Day05 problem = new Day05();
 
   @Test
