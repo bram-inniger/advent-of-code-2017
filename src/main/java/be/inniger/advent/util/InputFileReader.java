@@ -1,6 +1,7 @@
 package be.inniger.advent.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.stream.Collectors.toList;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,5 +24,11 @@ public final class InputFileReader {
     catch (IOException e) {
       throw new IllegalArgumentException(e);
     }
+  }
+
+  public static List<Integer> readInts(String fileName) {
+    return read(fileName).stream()
+        .map(Integer::parseInt)
+        .collect(toList());
   }
 }
