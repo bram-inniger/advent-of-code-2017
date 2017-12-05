@@ -23,4 +23,16 @@ public class Day05Test extends DailyTest {
     assertThat(problem.solveFirst(readInts(FILE_NAME)))
         .isEqualTo(388611);
   }
+
+  @Test
+  public void validateSecondSampleInputs() {
+    assertThat(problem.solveSecond(asList(0, 3, 0, 1, -3)))
+        .isEqualTo(10);
+  }
+
+  @Test
+  public void validateSecondSolution() {
+    assertThat(problem.solveSecond(readInts(FILE_NAME)))
+        .isEqualTo(27763113);
+  }
 }
