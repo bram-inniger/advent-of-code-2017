@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public final class InputFileReader {
 
@@ -26,8 +27,15 @@ public final class InputFileReader {
     }
   }
 
-  public static List<Integer> readInts(String fileName) {
+  public static List<Integer> readMultiLineInts(String fileName) {
     return read(fileName).stream()
+        .map(Integer::parseInt)
+        .collect(toList());
+  }
+
+  public static List<Integer> readSameLineInts(String fileName) {
+    return Pattern.compile("\\s+")
+        .splitAsStream(read(fileName).get(0))
         .map(Integer::parseInt)
         .collect(toList());
   }

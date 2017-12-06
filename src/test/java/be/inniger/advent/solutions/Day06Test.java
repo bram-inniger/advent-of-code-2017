@@ -1,42 +1,41 @@
 package be.inniger.advent.solutions;
 
-import static be.inniger.advent.util.InputFileReader.readMultiLineInts;
+import static be.inniger.advent.util.InputFileReader.readSameLineInts;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import be.inniger.advent.DailyTest;
 
-public class Day05Test extends DailyTest {
+public class Day06Test extends DailyTest {
 
-  private final Day05 problem = new Day05();
+  private final Day06 problem = new Day06();
 
   @Override
   @Test
   public void validateFirstSampleInputs() {
-    assertThat(problem.solveFirst(asList(0, 3, 0, 1, -3)))
+    assertThat(problem.solveFirst(asList(0, 2, 7, 0)))
         .isEqualTo(5);
   }
 
   @Override
   @Test
   public void validateFirstSolution() {
-    assertThat(problem.solveFirst(readMultiLineInts(FILE_NAME)))
-        .isEqualTo(388611);
+    assertThat(problem.solveFirst(readSameLineInts(FILE_NAME)))
+        .isEqualTo(7864);
   }
 
   @Override
+  @Ignore
   @Test
   public void validateSecondSampleInputs() {
-    assertThat(problem.solveSecond(asList(0, 3, 0, 1, -3)))
-        .isEqualTo(10);
   }
 
   @Override
+  @Ignore
   @Test
   public void validateSecondSolution() {
-    assertThat(problem.solveSecond(readMultiLineInts(FILE_NAME)))
-        .isEqualTo(27763113);
   }
 }
