@@ -3,12 +3,10 @@ package be.inniger.advent.solutions;
 import static java.util.Comparator.comparingInt;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -20,29 +18,25 @@ public class Day06 implements DailyProblem<List<Integer>> {
 
   @Override
   public int solveFirst(List<Integer> input) {
-    Set<Memory> states = new HashSet<>();
-    Memory state = new Memory(input);
-
-    while (!states.contains(state)) {
-      states.add(state);
-      state = state.redistribute();
-    }
-
-    return states.size();
+    return solve(input, (__, states) -> states.size());
   }
 
   @Override
   public int solveSecond(List<Integer> input) {
+    return solve(input, (state, states) -> states.size() - states.get(state));
+  }
+
+  private int solve(List<Integer> startingState, BiFunction<Memory, Map<Memory, Integer>, Integer> solutionCalculator) {
     int cycles = 0;
     Map<Memory, Integer> states = new HashMap<>();
-    Memory state = new Memory(input);
+    Memory state = new Memory(startingState);
 
     while (!states.containsKey(state)) {
       states.put(state, cycles++);
       state = state.redistribute();
     }
 
-    return cycles - states.get(state);
+    return solutionCalculator.apply(state, states);
   }
 
   private static final class Memory {
