@@ -1,8 +1,10 @@
 package be.inniger.advent.solutions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -27,7 +29,16 @@ public class Day06 implements DailyProblem<List<Integer>> {
 
   @Override
   public int solveSecond(List<Integer> input) {
-    throw new UnsupportedOperationException();
+    int cycles = 0;
+    Map<Memory, Integer> states = new HashMap<>();
+    Memory state = new Memory(input);
+
+    while (!states.containsKey(state)) {
+      states.put(state, cycles++);
+      state = state.redistribute();
+    }
+
+    return cycles - states.get(state);
   }
 
   private static final class Memory {
