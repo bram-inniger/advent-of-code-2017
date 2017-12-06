@@ -1,11 +1,15 @@
 package be.inniger.advent.solutions;
 
+import static java.util.Comparator.comparingInt;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -65,17 +69,10 @@ public class Day06 implements DailyProblem<List<Integer>> {
     }
 
     private int getHighestNumberIndex(List<Integer> banks) {
-      int index = 0;
-      int value = 0;
-
-      for (int i = 0; i < banks.size(); i++) {
-        if (banks.get(i) > value) {
-          index = i;
-          value = banks.get(i);
-        }
-      }
-
-      return index;
+      return IntStream.range(0, banks.size())
+          .boxed()
+          .max(comparingInt(banks::get))
+          .orElseThrow(IllegalArgumentException::new);
     }
 
     @Override
