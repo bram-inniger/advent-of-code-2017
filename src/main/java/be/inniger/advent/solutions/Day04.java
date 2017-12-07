@@ -11,15 +11,15 @@ import java.util.regex.Pattern;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day04 implements DailyProblem<List<String>> {
+public class Day04 implements DailyProblem<List<String>, Integer> {
 
   @Override
-  public int solveFirst(List<String> inputs) {
+  public Integer solveFirst(List<String> inputs) {
     return solve(inputs, identity());
   }
 
   @Override
-  public int solveSecond(List<String> inputs) {
+  public Integer solveSecond(List<String> inputs) {
     return solve(inputs, this::sortLetters);
   }
 

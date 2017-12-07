@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import be.inniger.advent.DailyProblem;
 
 @SuppressWarnings("PointlessArithmeticExpression")
-public class Day03 implements DailyProblem<Integer> {
+public class Day03 implements DailyProblem<Integer, Integer> {
 
   private final List<Point> neighbours = asList(
       point(1, 0),
@@ -39,7 +39,7 @@ public class Day03 implements DailyProblem<Integer> {
    * remark now that every value following 25 is on a square that is distance 1 further, so do starting+1 and you get the base number to start X and Y with.
    */
   @Override
-  public int solveFirst(Integer input) {
+  public Integer solveFirst(Integer input) {
     Point coordinates = getCoordinates(input);
     return abs(coordinates.x) + abs(coordinates.y);
   }
@@ -48,7 +48,7 @@ public class Day03 implements DailyProblem<Integer> {
    * Simply iterate over all spiral-points, calculating and storing the new value, until the original input is surpassed.
    */
   @Override
-  public int solveSecond(Integer input) {
+  public Integer solveSecond(Integer input) {
     Map<Point, Integer> grid = new HashMap<>();
     grid.put(point(0, 0), 1);
 

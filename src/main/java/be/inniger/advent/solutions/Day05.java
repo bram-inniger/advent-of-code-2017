@@ -5,15 +5,15 @@ import java.util.function.IntUnaryOperator;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day05 implements DailyProblem<List<Integer>> {
+public class Day05 implements DailyProblem<List<Integer>, Integer> {
 
   @Override
-  public int solveFirst(List<Integer> offsets) {
+  public Integer solveFirst(List<Integer> offsets) {
     return solve(offsets, __ -> 1);
   }
 
   @Override
-  public int solveSecond(List<Integer> offsets) {
+  public Integer solveSecond(List<Integer> offsets) {
     return solve(offsets, offset -> offset < 3 ? 1 : -1);
   }
 

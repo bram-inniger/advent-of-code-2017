@@ -14,15 +14,15 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day06 implements DailyProblem<List<Integer>> {
+public class Day06 implements DailyProblem<List<Integer>, Integer> {
 
   @Override
-  public int solveFirst(List<Integer> input) {
+  public Integer solveFirst(List<Integer> input) {
     return solve(input, (__, states) -> states.size());
   }
 
   @Override
-  public int solveSecond(List<Integer> input) {
+  public Integer solveSecond(List<Integer> input) {
     return solve(input, (state, states) -> states.size() - states.get(state));
   }
 

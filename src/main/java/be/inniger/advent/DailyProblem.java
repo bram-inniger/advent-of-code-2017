@@ -1,8 +1,8 @@
 package be.inniger.advent;
 
-public interface DailyProblem<T> {
+public interface DailyProblem<I, R> {
 
-  int solveFirst(T input);
+  R solveFirst(I input);
 
-  int solveSecond(T input);
+  R solveSecond(I input);
 }

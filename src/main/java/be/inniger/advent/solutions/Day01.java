@@ -4,15 +4,15 @@ import java.util.stream.IntStream;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day01 implements DailyProblem<String> {
+public class Day01 implements DailyProblem<String, Integer> {
 
   @Override
-  public int solveFirst(String input) {
+  public Integer solveFirst(String input) {
     return solve(input, 1);
   }
 
   @Override
-  public int solveSecond(String input) {
+  public Integer solveSecond(String input) {
     return solve(input, input.length() / 2);
   }
 
