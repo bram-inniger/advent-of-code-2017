@@ -4,7 +4,6 @@ import static be.inniger.advent.util.InputFileReader.read;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import be.inniger.advent.DailyTest;
@@ -32,14 +31,20 @@ public class Day08Test extends DailyTest {
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSampleInputs() {
+    assertThat(problem.solveSecond(asList(
+        "b inc 5 if a > 1",
+        "a inc 1 if b < 5",
+        "c dec -10 if a >= 1",
+        "c inc -20 if c == 10")))
+        .isEqualTo(10);
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThat(problem.solveSecond(read(FILE_NAME)))
+        .isEqualTo(5443);
   }
 }

@@ -27,10 +27,16 @@ public class Day08 implements DailyProblem<List<String>, Integer> {
 
   @Override
   public Integer solveSecond(List<String> input) {
-    throw new UnsupportedOperationException();
+    Map<String, Integer> registers = new HashMap<>();
+
+    return input.stream()
+        .map(instruction -> Pattern.compile(" ").split(instruction))
+        .mapToInt(instruction -> execute(instruction, registers))
+        .max()
+        .orElseThrow(IllegalArgumentException::new);
   }
 
-  private void execute(String[] instruction, Map<String, Integer> registers) {
+  private int execute(String[] instruction, Map<String, Integer> registers) {
     String register = instruction[0];
     BinaryOperator<Integer> operation = getOperation(instruction[1]);
     int amount = Integer.parseInt(instruction[2]);
@@ -38,10 +44,14 @@ public class Day08 implements DailyProblem<List<String>, Integer> {
     BiPredicate<Integer, Integer> test = getConditional(instruction[5]);
     int testAmount = Integer.parseInt(instruction[6]);
 
+    int newValue = 0;
     if (test.test(testRegister, testAmount)) {
       int registerValue = registers.getOrDefault(register, 0);
-      registers.put(register, operation.apply(registerValue, amount));
+      newValue = operation.apply(registerValue, amount);
+      registers.put(register, newValue);
     }
+
+    return newValue;
   }
 
   private BinaryOperator<Integer> getOperation(String operation) {
@@ -58,7 +68,7 @@ public class Day08 implements DailyProblem<List<String>, Integer> {
   private BiPredicate<Integer, Integer> getConditional(String conditional) {
     switch (conditional) {
       case "==":
-        return (a, b) -> a.equals(b);
+        return Integer::equals;
       case "!=":
         return (a, b) -> !a.equals(b);
       case ">":
