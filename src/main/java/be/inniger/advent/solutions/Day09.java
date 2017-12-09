@@ -6,46 +6,22 @@ public class Day09 implements DailyProblem<String, Integer> {
 
   @Override
   public Integer solveFirst(String input) {
-    int sum = 0;
-    int depth = 0;
-    boolean garbage = false;
-
-    for (int i = 0; i < input.length(); i++) {
-      switch (input.charAt(i)) {
-        case '!':
-          i++;
-          break;
-        case '>':
-          garbage = false;
-          break;
-        case '<':
-          garbage = true;
-          break;
-        case '{':
-          if (!garbage) {
-            depth++;
-            sum += depth;
-          }
-          break;
-        case '}':
-          if (!garbage) {
-            depth--;
-          }
-          break;
-        default:
-      }
-    }
-
-    return sum;
+    return solve(input).groupSum;
   }
 
   @Override
   public Integer solveSecond(String input) {
-    int count = 0;
+    return solve(input).garbageCount;
+  }
+
+  private StreamInfo solve(String stream) {
+    int groupSum = 0;
+    int depth = 0;
+    int garbageCount = 0;
     boolean garbage = false;
 
-    for (int i = 0; i < input.length(); i++) {
-      switch (input.charAt(i)) {
+    for (int i = 0; i < stream.length(); i++) {
+      switch (stream.charAt(i)) {
         case '!':
           i++;
           break;
@@ -54,27 +30,45 @@ public class Day09 implements DailyProblem<String, Integer> {
           break;
         case '<':
           if (garbage) {
-            count++;
+            garbageCount++;
           }
           garbage = true;
           break;
         case '{':
           if (garbage) {
-            count++;
+            garbageCount++;
+          }
+          else {
+            depth++;
+            groupSum += depth;
           }
           break;
         case '}':
           if (garbage) {
-            count++;
+            garbageCount++;
+          }
+          else {
+            depth--;
           }
           break;
         default:
           if (garbage) {
-            count++;
+            garbageCount++;
           }
       }
     }
 
-    return count;
+    return new StreamInfo(groupSum, garbageCount);
+  }
+
+  private static class StreamInfo {
+
+    private final int groupSum;
+    private final int garbageCount;
+
+    private StreamInfo(int groupSum, int garbageCount) {
+      this.groupSum = groupSum;
+      this.garbageCount = garbageCount;
+    }
   }
 }
