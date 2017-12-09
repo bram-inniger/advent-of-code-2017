@@ -48,14 +48,34 @@ public class Day09Test extends DailyTest {
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSampleInputs() {
+    assertThat(problem.solveSecond("<>"))
+        .isEqualTo(0);
+
+    assertThat(problem.solveSecond("<random characters>"))
+        .isEqualTo(17);
+
+    assertThat(problem.solveSecond("<<<<>"))
+        .isEqualTo(3);
+
+    assertThat(problem.solveSecond("<{!>}>"))
+        .isEqualTo(2);
+
+    assertThat(problem.solveSecond("<!!>"))
+        .isEqualTo(0);
+
+    assertThat(problem.solveSecond("<!!!>>"))
+        .isEqualTo(0);
+
+    assertThat(problem.solveSecond("<{o\"i!a,<{i<a>"))
+        .isEqualTo(10);
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThat(problem.solveSecond(readLine(FILE_NAME)))
+        .isEqualTo(7053);
   }
 }

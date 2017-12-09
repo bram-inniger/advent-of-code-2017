@@ -13,13 +13,13 @@ public class Day09 implements DailyProblem<String, Integer> {
     for (int i = 0; i < input.length(); i++) {
       switch (input.charAt(i)) {
         case '!':
-          i++; // Skip te next character
+          i++;
           break;
         case '>':
-          garbage = false; // Leave garbage mode
+          garbage = false;
           break;
         case '<':
-          garbage = true; // Enter garbage mode, or NOP if already in garbage mode
+          garbage = true;
           break;
         case '{':
           if (!garbage) {
@@ -33,7 +33,6 @@ public class Day09 implements DailyProblem<String, Integer> {
           }
           break;
         default:
-          // Do nothing
       }
     }
 
@@ -42,6 +41,40 @@ public class Day09 implements DailyProblem<String, Integer> {
 
   @Override
   public Integer solveSecond(String input) {
-    throw new UnsupportedOperationException();
+    int count = 0;
+    boolean garbage = false;
+
+    for (int i = 0; i < input.length(); i++) {
+      switch (input.charAt(i)) {
+        case '!':
+          i++;
+          break;
+        case '>':
+          garbage = false;
+          break;
+        case '<':
+          if (garbage) {
+            count++;
+          }
+          garbage = true;
+          break;
+        case '{':
+          if (garbage) {
+            count++;
+          }
+          break;
+        case '}':
+          if (garbage) {
+            count++;
+          }
+          break;
+        default:
+          if (garbage) {
+            count++;
+          }
+      }
+    }
+
+    return count;
   }
 }
