@@ -1,6 +1,6 @@
 package be.inniger.advent.solutions;
 
-import static be.inniger.advent.util.InputFileReader.read;
+import static be.inniger.advent.util.InputFileReader.readLine;
 import static java.lang.Integer.parseInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +31,7 @@ public class Day03Test extends DailyTest {
   @Override
   @Test
   public void validateFirstSolution() {
-    assertThat(problem.solveFirst(parseInt(read(FILE_NAME).get(0))))
+    assertThat(problem.solveFirst(parseInt(readLine(FILE_NAME))))
         .isEqualTo(438);
   }
 
@@ -58,7 +58,7 @@ public class Day03Test extends DailyTest {
   @Override
   @Test
   public void validateSecondSolution() {
-    assertThat(problem.solveSecond(parseInt(read(FILE_NAME).get(0))))
+    assertThat(problem.solveSecond(parseInt(readLine(FILE_NAME))))
         .isEqualTo(266330);
   }
 }

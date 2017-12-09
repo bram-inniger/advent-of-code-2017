@@ -1,6 +1,6 @@
 package be.inniger.advent.solutions;
 
-import static be.inniger.advent.util.InputFileReader.read;
+import static be.inniger.advent.util.InputFileReader.readLine;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class Day01Test extends DailyTest {
   @Override
   @Test
   public void validateFirstSolution() {
-    assertThat(problem.solveFirst(read(FILE_NAME).get(0)))
+    assertThat(problem.solveFirst(readLine(FILE_NAME)))
         .isEqualTo(1102);
   }
 
@@ -56,7 +56,7 @@ public class Day01Test extends DailyTest {
   @Override
   @Test
   public void validateSecondSolution() {
-    assertThat(problem.solveSecond(read(FILE_NAME).get(0)))
+    assertThat(problem.solveSecond(readLine(FILE_NAME)))
         .isEqualTo(1076);
   }
 }

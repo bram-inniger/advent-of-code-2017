@@ -27,6 +27,10 @@ public final class InputFileReader {
     }
   }
 
+  public static String readLine(String fileName) {
+    return read(fileName).get(0);
+  }
+
   public static List<Integer> readMultiLineInts(String fileName) {
     return read(fileName).stream()
         .map(Integer::parseInt)
@@ -35,7 +39,7 @@ public final class InputFileReader {
 
   public static List<Integer> readSameLineInts(String fileName) {
     return Pattern.compile("\\s+")
-        .splitAsStream(read(fileName).get(0))
+        .splitAsStream(readLine(fileName))
         .map(Integer::parseInt)
         .collect(toList());
   }
