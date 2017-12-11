@@ -11,21 +11,34 @@ public class Day11 implements DailyProblem<List<String>, Integer> {
 
   @Override
   public Integer solveFirst(List<String> inputs) {
-    HexPosition position = HexPosition.center();
-
-    for (String direction : inputs) {
-      position = position.move(direction);
-    }
-
-    return position.distanceToCenter();
+    return solve(inputs).finalPosition.distanceToCenter();
   }
 
   @Override
   public Integer solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
+    return solve(inputs).furthestPosition.distanceToCenter();
+  }
+
+  private HexPositionPair solve(List<String> inputs) {
+    HexPosition position = HexPosition.center();
+    HexPosition furthestPosition = null;
+    int furthestDistance = 0;
+
+    for (String direction : inputs) {
+      position = position.move(direction);
+      int distance = position.distanceToCenter();
+
+      if (distance > furthestDistance) {
+        furthestDistance = distance;
+        furthestPosition = position;
+      }
+    }
+
+    return new HexPositionPair(position, furthestPosition);
   }
 
   private static class HexPosition {
+
     private final int q;
     private final int r;
 
@@ -66,6 +79,17 @@ public class Day11 implements DailyProblem<List<String>, Integer> {
       return (abs(this.q - that.q)
           + abs(this.q + this.r - that.q - that.r)
           + abs(this.r - that.r)) / 2;
+    }
+  }
+
+  private static class HexPositionPair {
+
+    private final HexPosition finalPosition;
+    private final HexPosition furthestPosition;
+
+    private HexPositionPair(HexPosition finalPosition, HexPosition furthestPosition) {
+      this.finalPosition = finalPosition;
+      this.furthestPosition = furthestPosition;
     }
   }
 }
