@@ -38,7 +38,7 @@ public final class InputFileReader {
   }
 
   public static List<Integer> readSameLineInts(String fileName) {
-    return Pattern.compile("\\s+")
+    return Pattern.compile("\\W+")
         .splitAsStream(readLine(fileName))
         .map(Integer::parseInt)
         .collect(toList());

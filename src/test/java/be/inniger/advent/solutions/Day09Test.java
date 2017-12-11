@@ -3,7 +3,6 @@ package be.inniger.advent.solutions;
 import static be.inniger.advent.util.InputFileReader.readLine;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import be.inniger.advent.DailyTest;
