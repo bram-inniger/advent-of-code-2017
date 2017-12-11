@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.regex.Pattern;
 
+// TODO - Clean up
 public final class InputFileReader {
 
   private static final Path INPUTS = Paths.get("src", "main", "resources", "inputs");
@@ -29,6 +30,12 @@ public final class InputFileReader {
 
   public static String readLine(String fileName) {
     return read(fileName).get(0);
+  }
+
+  public static List<String> readSameLineStrings(String fileName) {
+    return Pattern.compile("\\W+")
+        .splitAsStream(readLine(fileName))
+        .collect(toList());
   }
 
   public static List<Integer> readMultiLineInts(String fileName) {
