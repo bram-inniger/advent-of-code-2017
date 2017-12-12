@@ -17,26 +17,39 @@ public class Day12 implements DailyProblem<List<String>, Integer> {
   public Integer solveFirst(List<String> inputs) {
     Map<Integer, Program> programs = generateGraph(inputs);
 
+    markVisited(programs, 0);
+
+    return (int) programs.values().stream()
+        .filter(Program::isVisited)
+        .count();
+  }
+
+  @Override
+  public Integer solveSecond(List<String> inputs) {
+    Map<Integer, Program> programs = generateGraph(inputs);
+    int groupsSeen = 0;
+
+    while (!programs.isEmpty()) {
+      groupsSeen++;
+      markVisited(programs, programs.keySet().iterator().next());
+      programs.values().removeIf(Program::isVisited);
+    }
+
+    return groupsSeen;
+  }
+
+  private void markVisited(Map<Integer, Program> programs, int from) {
     Deque<Integer> toVisit = new ArrayDeque<>();
-    toVisit.push(0);
-    int count = 0;
+    toVisit.push(from);
 
     while (!toVisit.isEmpty()) {
       Program program = programs.get(toVisit.pop());
 
       if (!program.isVisited()) {
-        count++;
         program.markVisited();
         program.connectedTo.forEach(toVisit::push);
       }
     }
-
-    return count;
-  }
-
-  @Override
-  public Integer solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
   }
 
   private Map<Integer, Program> generateGraph(List<String> inputs) {

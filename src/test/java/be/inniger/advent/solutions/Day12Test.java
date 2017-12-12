@@ -36,14 +36,24 @@ public class Day12Test extends DailyTest {
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSampleInputs() {
+    assertThat(problem.solveSecond(asList(
+        "0 <-> 2",
+        "1 <-> 1",
+        "2 <-> 0, 3, 4",
+        "3 <-> 2, 4",
+        "4 <-> 2, 3, 6",
+        "5 <-> 6",
+        "6 <-> 4, 5"
+    )))
+        .isEqualTo(2);
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThat(problem.solveSecond(read(FILE_NAME)))
+        .isEqualTo(193);
   }
 }
