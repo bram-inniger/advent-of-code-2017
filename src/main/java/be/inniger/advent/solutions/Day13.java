@@ -20,7 +20,21 @@ public class Day13 implements DailyProblem<List<String>, Integer> {
 
   @Override
   public Integer solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
+    List<Scanner> scanners = inputs.stream()
+        .map(Scanner::new)
+        .collect(toList());
+    int delay = 0;
+
+    while (hitsScanners(scanners, delay)) {
+      delay++;
+    }
+
+    return delay;
+  }
+
+  private boolean hitsScanners(List<Scanner> scanners, int delay) {
+    return scanners.stream()
+        .anyMatch(scanner -> (scanner.depth + delay) % ((scanner.range - 1) * 2) == 0);
   }
 
   private static class Scanner {
