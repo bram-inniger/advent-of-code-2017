@@ -16,13 +16,13 @@ public abstract class DailyTest {
   public abstract void validateSecondSolution();
 
   private String getFileNameFromClassName() {
-    Matcher matcher = Pattern.compile("Day(.*?)Test")
+    Matcher matcher = Pattern.compile("^Day(?<day>.*?)Test$")
         .matcher(getClass().getSimpleName());
 
     if (!matcher.matches()) {
       throw new IllegalArgumentException();
     }
 
-    return matcher.group(1) + ".txt";
+    return matcher.group("day") + ".txt";
   }
 }

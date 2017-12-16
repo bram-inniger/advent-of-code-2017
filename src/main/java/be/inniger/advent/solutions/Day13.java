@@ -3,6 +3,7 @@ package be.inniger.advent.solutions;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import be.inniger.advent.DailyProblem;
@@ -39,17 +40,19 @@ public class Day13 implements DailyProblem<List<String>, Integer> {
 
   private static class Scanner {
 
+    private static final Pattern PATTERN = Pattern.compile("^(?<depth>\\d+): (?<range>\\d+)$");
     private final int depth;
     private final int range;
 
     private Scanner(String scanner) {
-      List<Integer> parsedScanner = Pattern.compile("\\W+")
-          .splitAsStream(scanner)
-          .map(Integer::parseInt)
-          .collect(toList());
+      Matcher matcher = PATTERN.matcher(scanner);
 
-      this.depth = parsedScanner.get(0);
-      this.range = parsedScanner.get(1);
+      if (!matcher.matches()) {
+        throw new IllegalArgumentException();
+      }
+
+      this.depth = Integer.parseInt(matcher.group("depth"));
+      this.range = Integer.parseInt(matcher.group("range"));
     }
   }
 }
