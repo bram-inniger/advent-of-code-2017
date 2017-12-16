@@ -15,8 +15,8 @@ public final class InputFileReader {
 
   private static final Path INPUTS = Paths.get("src", "main", "resources", "inputs");
 
-  private InputFileReader() {
-    // Static utility class
+  private InputFileReader() throws IllegalAccessException{
+    throw new IllegalAccessException();
   }
 
   public static List<String> read(String fileName) {
