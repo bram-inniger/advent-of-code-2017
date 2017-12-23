@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 
 import be.inniger.advent.DailyProblem;
 
+// TODO - Externalise 'visited' out of Program
+// TODO - Rewrite to use Union Find instead of BFS
 public class Day12 implements DailyProblem<List<String>, Integer> {
 
   @Override
