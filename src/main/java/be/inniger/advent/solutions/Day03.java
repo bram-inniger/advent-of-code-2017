@@ -1,6 +1,6 @@
 package be.inniger.advent.solutions;
 
-import static be.inniger.advent.solutions.Day03.Point.point;
+import static be.inniger.advent.util.Point.point;
 import static java.lang.Math.abs;
 import static java.lang.Math.floor;
 import static java.lang.Math.sqrt;
@@ -11,10 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import be.inniger.advent.DailyProblem;
+import be.inniger.advent.util.Point;
 
 @SuppressWarnings("PointlessArithmeticExpression")
 public class Day03 implements DailyProblem<Integer, Integer> {
@@ -41,7 +39,7 @@ public class Day03 implements DailyProblem<Integer, Integer> {
   @Override
   public Integer solveFirst(Integer input) {
     Point coordinates = getCoordinates(input);
-    return abs(coordinates.x) + abs(coordinates.y);
+    return abs(coordinates.getX()) + abs(coordinates.getY());
   }
 
   /*
@@ -67,8 +65,8 @@ public class Day03 implements DailyProblem<Integer, Integer> {
   private int getNeighboursSum(Point coordinate, Map<Point, Integer> grid) {
     return neighbours.stream()
         .map(neighbour -> point(
-            coordinate.x + neighbour.x,
-            coordinate.y + neighbour.y))
+            coordinate.getX() + neighbour.getX(),
+            coordinate.getY() + neighbour.getY()))
         .map(grid::get)
         .filter(Objects::nonNull)
         .reduce(Integer::sum)
@@ -117,46 +115,5 @@ public class Day03 implements DailyProblem<Integer, Integer> {
     }
 
     return root;
-  }
-
-  static class Point {
-
-    private final int x;
-    private final int y;
-
-    private Point(int x, int y) {
-      this.x = x;
-      this.y = y;
-    }
-
-    static Point point(int x, int y) {
-      return new Point(x, y);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (this == o) {
-        return true;
-      }
-
-      if (o == null || getClass() != o.getClass()) {
-        return false;
-      }
-
-      Point point = (Point) o;
-
-      return new EqualsBuilder()
-          .append(x, point.x)
-          .append(y, point.y)
-          .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-      return new HashCodeBuilder(17, 37)
-          .append(x)
-          .append(y)
-          .toHashCode();
-    }
   }
 }
