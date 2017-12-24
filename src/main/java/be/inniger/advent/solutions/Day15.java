@@ -16,13 +16,13 @@ public class Day15 implements DailyProblem<List<String>, Long> {
   @Override
   public Long solveFirst(List<String> inputs) {
     return solve(inputs, 40_000_000,
-        (a, b) -> __ -> a.next() == b.next());
+        (a, b) -> __ -> a.next(1) == b.next(1));
   }
 
   @Override
   public Long solveSecond(List<String> inputs) {
     return solve(inputs, 5_000_000,
-        (a, b) -> __ -> a.nextMultipleOf(4) == b.nextMultipleOf(8));
+        (a, b) -> __ -> a.next(4) == b.next(8));
   }
 
   private long solve(List<String> inputs, int nrIterations, BiFunction<Generator, Generator, IntPredicate> predicateBiFunction) {
@@ -54,25 +54,17 @@ public class Day15 implements DailyProblem<List<String>, Long> {
     }
 
     /**
-     * Calculates the next value of the generator.
+     * Calculates the next value of the generator that is a multiple of coefficient.
      *
      * @return The *lowest 16 bits* of the newly generated value
      */
-    private long next() {
-      currentValue = (currentValue * factor) % DIVISOR;
-
-      return currentValue & 0xFFFF;
-    }
-
-    private long nextMultipleOf(int coefficient) {
-      long nextLowest16Bits;
-
+    private long next(int coefficient) {
       do {
-        nextLowest16Bits = next();
+        currentValue = (currentValue * factor) % DIVISOR;
       }
       while (currentValue % coefficient != 0);
 
-      return nextLowest16Bits;
+      return currentValue & 0xFFFF;
     }
   }
 }
