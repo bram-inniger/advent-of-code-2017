@@ -11,20 +11,20 @@ import java.util.regex.Pattern;
 
 import be.inniger.advent.DailyProblem;
 
-public class Day04 implements DailyProblem<List<String>, Integer> {
+public class Day04 implements DailyProblem<List<String>, Long> {
 
   @Override
-  public Integer solveFirst(List<String> inputs) {
+  public Long solveFirst(List<String> inputs) {
     return solve(inputs, identity());
   }
 
   @Override
-  public Integer solveSecond(List<String> inputs) {
+  public Long solveSecond(List<String> inputs) {
     return solve(inputs, this::sortLetters);
   }
 
-  private int solve(List<String> passphrases, Function<String, String> mapper) {
-    return (int) passphrases.stream()
+  private long solve(List<String> passphrases, Function<String, String> mapper) {
+    return passphrases.stream()
         .filter(passphrase -> isValid(passphrase, mapper))
         .count();
   }

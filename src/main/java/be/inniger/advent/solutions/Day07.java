@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-// TODO - Fix the bug and clean up / simplify / shorten the code
 import be.inniger.advent.DailyProblem;
 
+// TODO - Fix the bug and clean up / simplify / shorten the code
 public class Day07 implements DailyProblem<List<String>, String> {
 
   private static final Pattern NON_ALPHANUMERIC = Pattern.compile("\\W+");

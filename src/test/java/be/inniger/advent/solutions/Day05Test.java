@@ -1,6 +1,6 @@
 package be.inniger.advent.solutions;
 
-import static be.inniger.advent.util.InputFileReader.readMultiLineInts;
+import static be.inniger.advent.util.InputFileReader.readMultiLine;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +22,7 @@ public class Day05Test extends DailyTest {
   @Override
   @Test
   public void validateFirstSolution() {
-    assertThat(problem.solveFirst(readMultiLineInts(FILE_NAME)))
+    assertThat(problem.solveFirst(readMultiLine(FILE_NAME, Integer::parseInt)))
         .isEqualTo(388611);
   }
 
@@ -36,7 +36,7 @@ public class Day05Test extends DailyTest {
   @Override
   @Test
   public void validateSecondSolution() {
-    assertThat(problem.solveSecond(readMultiLineInts(FILE_NAME)))
+    assertThat(problem.solveSecond(readMultiLine(FILE_NAME, Integer::parseInt)))
         .isEqualTo(27763113);
   }
 }

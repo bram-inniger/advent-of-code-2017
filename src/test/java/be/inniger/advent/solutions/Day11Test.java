@@ -1,12 +1,17 @@
 package be.inniger.advent.solutions;
 
-import static be.inniger.advent.util.InputFileReader.readSameLineStrings;
+import static be.inniger.advent.util.InputFileReader.readSingleLine;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
 import be.inniger.advent.DailyTest;
+import be.inniger.advent.util.InputFileReader;
 
 public class Day11Test extends DailyTest {
 
@@ -31,7 +36,7 @@ public class Day11Test extends DailyTest {
   @Override
   @Test
   public void validateFirstSolution() {
-    assertThat(problem.solveFirst(readSameLineStrings(FILE_NAME)))
+    assertThat(problem.solveFirst(readSingleLine(FILE_NAME, Pattern.compile("\\W+"))))
         .isEqualTo(650);
   }
 
@@ -44,7 +49,7 @@ public class Day11Test extends DailyTest {
   @Override
   @Test
   public void validateSecondSolution() {
-    assertThat(problem.solveSecond(readSameLineStrings(FILE_NAME)))
+    assertThat(problem.solveSecond(readSingleLine(FILE_NAME, Pattern.compile("\\W+"))))
         .isEqualTo(1465);
   }
 }
