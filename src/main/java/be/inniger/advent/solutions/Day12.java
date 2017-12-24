@@ -13,23 +13,23 @@ import be.inniger.advent.DailyProblem;
 
 // TODO - Externalise 'visited' out of Program
 // TODO - Rewrite to use Union Find instead of BFS
-public class Day12 implements DailyProblem<List<String>, Integer> {
+public class Day12 implements DailyProblem<List<String>, Long> {
 
   @Override
-  public Integer solveFirst(List<String> inputs) {
+  public Long solveFirst(List<String> inputs) {
     Map<Integer, Program> programs = generateGraph(inputs);
 
     markVisited(programs, 0);
 
-    return (int) programs.values().stream()
+    return programs.values().stream()
         .filter(Program::isVisited)
         .count();
   }
 
   @Override
-  public Integer solveSecond(List<String> inputs) {
+  public Long solveSecond(List<String> inputs) {
     Map<Integer, Program> programs = generateGraph(inputs);
-    int groupsSeen = 0;
+    long groupsSeen = 0;
 
     while (!programs.isEmpty()) {
       groupsSeen++;

@@ -18,7 +18,8 @@ public class Day15Test extends DailyTest {
   public void validateFirstSampleInputs() {
     assertThat(problem.solveFirst(asList(
         "Generator A starts with 65",
-        "Generator B starts with 8921")))
+        "Generator B starts with 8921"
+    )))
         .isEqualTo(588);
   }
 

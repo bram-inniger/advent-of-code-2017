@@ -28,7 +28,8 @@ public class Day07Test extends DailyTest {
         "jptl (61)",
         "ugml (68) -> gyxo, ebii, jptl",
         "gyxo (61)",
-        "cntj (57)")))
+        "cntj (57)"
+    )))
         .isEqualTo("tknk");
   }
 
@@ -55,7 +56,8 @@ public class Day07Test extends DailyTest {
         "jptl (61)",
         "ugml (68) -> gyxo, ebii, jptl",
         "gyxo (61)",
-        "cntj (57)")))
+        "cntj (57)"
+    )))
         .isEqualTo("60");
   }
 
