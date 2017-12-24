@@ -31,14 +31,19 @@ public class Day15Test extends DailyTest {
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSampleInputs() {
+    assertThat(problem.solveSecond(asList(
+        "Generator A starts with 65",
+        "Generator B starts with 8921"
+    )))
+        .isEqualTo(309);
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThat(problem.solveSecond(readMultiLine(FILE_NAME)))
+        .isEqualTo(316);
   }
 }
