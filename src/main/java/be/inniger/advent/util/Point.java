@@ -3,7 +3,7 @@ package be.inniger.advent.util;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Point {
+public final class Point {
 
   private final int x;
   private final int y;
