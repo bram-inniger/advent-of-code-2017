@@ -30,11 +30,13 @@ public class Day17Test extends DailyTest {
   @Ignore
   @Test
   public void validateSecondSampleInputs() {
+    // No test input solution given...
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThat(problem.solveSecond(readSingleLine(FILE_NAME, Integer::parseInt)))
+        .isEqualTo(11995607);
   }
 }
