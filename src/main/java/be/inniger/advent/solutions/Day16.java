@@ -3,10 +3,14 @@ package be.inniger.advent.solutions;
 import static java.lang.Integer.parseInt;
 import static java.util.Map.Entry;
 import static java.util.Map.Entry.comparingByValue;
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
@@ -14,27 +18,48 @@ import be.inniger.advent.DailyProblem;
 
 public class Day16 implements DailyProblem<List<String>, String> {
 
+  private static final Pattern PATTERN = Pattern.compile("/");
+  private final int nrPrograms;
+
+  Day16(int nrPrograms) {
+    this.nrPrograms = nrPrograms;
+  }
+
   @Override
   public String solveFirst(List<String> inputs) {
-    Map<Character, Integer> progToPos = IntStream.rangeClosed('a', 'p')
-        .boxed()
-        .collect(toMap(
-            program -> (char) program.intValue(),
-            program -> program - 'a'));
+    Map<Character, Integer> progToPos = getInitialProgToPos();
+    dance(inputs, progToPos);
 
-    inputs.forEach(danceMove -> performMove(danceMove, progToPos));
-
-    return progToPos.entrySet()
-        .stream()
-        .sorted(comparingByValue())
-        .map(Entry::getKey)
-        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-        .toString();
+    return printPrograms(progToPos);
   }
 
   @Override
   public String solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
+    Map<Character, Integer> progToPos = getInitialProgToPos();
+    Set<Map<Character, Integer>> seenPermutations = new HashSet<>();
+
+    // Find the cycle size 'seenPermutations.size()'
+    while (!seenPermutations.contains(progToPos)) {
+      seenPermutations.add(new HashMap<>(progToPos));
+      dance(inputs, progToPos);
+    }
+
+    IntStream.range(0, 1_000_000_000 % seenPermutations.size()).forEach(__ ->
+        dance(inputs, progToPos));
+
+    return printPrograms(progToPos);
+  }
+
+  private Map<Character, Integer> getInitialProgToPos() {
+    return IntStream.rangeClosed(0, nrPrograms)
+        .boxed()
+        .collect(toMap(
+            i -> (char) ('a' + i),
+            identity()));
+  }
+
+  private void dance(List<String> inputs, Map<Character, Integer> progToPos) {
+    inputs.forEach(danceMove -> performMove(danceMove, progToPos));
   }
 
   private void performMove(String danceMove, Map<Character, Integer> progToPos) {
@@ -43,7 +68,7 @@ public class Day16 implements DailyProblem<List<String>, String> {
         spin(progToPos, parseInt(danceMove.substring(1)));
         break;
       case 'x':
-        String[] positions = Pattern.compile("/").split(danceMove.substring(1));
+        String[] positions = PATTERN.split(danceMove.substring(1));
         exchange(progToPos, parseInt(positions[0]), parseInt(positions[1]));
         break;
       case 'p':
@@ -80,5 +105,14 @@ public class Day16 implements DailyProblem<List<String>, String> {
         .map(Entry::getKey)
         .findAny()
         .orElseThrow(IllegalArgumentException::new);
+  }
+
+  private String printPrograms(Map<Character, Integer> progToPos) {
+    return progToPos.entrySet()
+        .stream()
+        .sorted(comparingByValue())
+        .map(Entry::getKey)
+        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+        .toString();
   }
 }
