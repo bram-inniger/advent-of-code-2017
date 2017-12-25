@@ -13,13 +13,24 @@ public class Day19 implements DailyProblem<List<String>, String> {
 
   @Override
   public String solveFirst(List<String> inputs) {
+    return solve(inputs).lettersFound;
+  }
+
+  @Override
+  public String solveSecond(List<String> inputs) {
+    return String.format("%d", solve(inputs).stepCount);
+  }
+
+  private Solution solve(List<String> inputs) {
     char[][] grid = generateGrid(inputs);
     Position position = getStartingPoint(grid[0]);
     Direction direction = Direction.DOWN;
     boolean done = false;
     StringBuilder sb = new StringBuilder();
+    int stepCount = 0;
 
     while (!done) {
+      stepCount++;
       position = direction.calculateNext(position);
       char c = grid[position.getRow()][position.getCol()];
 
@@ -46,12 +57,7 @@ public class Day19 implements DailyProblem<List<String>, String> {
       }
     }
 
-    return sb.toString();
-  }
-
-  @Override
-  public String solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
+    return new Solution(sb.toString(), stepCount);
   }
 
   private char[][] generateGrid(List<String> inputs) {
@@ -87,7 +93,19 @@ public class Day19 implements DailyProblem<List<String>, String> {
     }
   }
 
+  private static class Solution {
+
+    private final String lettersFound;
+    private final int stepCount;
+
+    private Solution(String lettersFound, int stepCount) {
+      this.lettersFound = lettersFound;
+      this.stepCount = stepCount;
+    }
+  }
+
   private enum Direction {
+
     UP(p -> position(p.getRow() - 1, p.getCol())),
     RIGHT(p -> position(p.getRow(), p.getCol() + 1)),
     DOWN(p -> position(p.getRow() + 1, p.getCol())),

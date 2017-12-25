@@ -4,7 +4,6 @@ import static be.inniger.advent.util.InputFileReader.readMultiLine;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import be.inniger.advent.DailyTest;
@@ -35,14 +34,23 @@ public class Day19Test extends DailyTest {
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSampleInputs() {
+    assertThat(problem.solveSecond(asList(
+        "     |          ",
+        "     |  +--+    ",
+        "     A  |  C    ",
+        " F---|----E|--+ ",
+        "     |  |  |  D ",
+        "     +B-+  +--+ "
+    )))
+        .isEqualTo("38");
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThat(problem.solveSecond(readMultiLine(FILE_NAME)))
+        .isEqualTo("17358");
   }
 }
