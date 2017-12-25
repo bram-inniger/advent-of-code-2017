@@ -19,11 +19,6 @@ import be.inniger.advent.DailyProblem;
 public class Day16 implements DailyProblem<List<String>, String> {
 
   private static final Pattern PATTERN = Pattern.compile("/");
-  private final int nrPrograms;
-
-  Day16(int nrPrograms) {
-    this.nrPrograms = nrPrograms;
-  }
 
   @Override
   public String solveFirst(List<String> inputs) {
@@ -51,7 +46,7 @@ public class Day16 implements DailyProblem<List<String>, String> {
   }
 
   private Map<Character, Integer> getInitialProgToPos() {
-    return IntStream.rangeClosed(0, nrPrograms)
+    return IntStream.rangeClosed(0, 15)
         .boxed()
         .collect(toMap(
             i -> (char) ('a' + i),
