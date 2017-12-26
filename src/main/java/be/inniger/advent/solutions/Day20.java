@@ -2,9 +2,12 @@ package be.inniger.advent.solutions;
 
 import static be.inniger.advent.util.Point3D.point3D;
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.function.UnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
@@ -16,16 +19,8 @@ public class Day20 implements DailyProblem<List<String>, Integer> {
 
   @Override
   public Integer solveFirst(List<String> inputs) {
-    List<Particle> particles = IntStream.range(0, inputs.size())
-        .mapToObj(i -> new Particle(i, inputs.get(i)))
-        .collect(toList());
-
-    // Assume the system is stable after 500 iterations
-    for (int i = 0; i < 500; i++) {
-      particles.forEach(Particle::move);
-    }
-
-    return particles.stream()
+    return performIterations(inputs, p -> { p.forEach(Particle::move); return p; })
+        .stream()
         .sorted(comparing(Particle::getManhattanDistanceToOrigin))
         .map(Particle::getNr)
         .findFirst()
@@ -34,7 +29,31 @@ public class Day20 implements DailyProblem<List<String>, Integer> {
 
   @Override
   public Integer solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
+    return performIterations(inputs, p -> { p.forEach(Particle::move); return removeDuplicatePositions(p); })
+        .size();
+  }
+
+  private List<Particle> performIterations(List<String> inputs, UnaryOperator<List<Particle>> move) {
+    List<Particle> particles = IntStream.range(0, inputs.size())
+        .mapToObj(i -> new Particle(i, inputs.get(i)))
+        .collect(toList());
+
+    // Assume the system is stable after 500 iterations
+    for (int i = 0; i < 500; i++) {
+      particles = move.apply(particles);
+    }
+
+    return particles;
+  }
+
+  private List<Particle> removeDuplicatePositions(List<Particle> particles) {
+    return particles.stream()
+        .collect(groupingBy(Particle::getPosition))
+        .values()
+        .stream()
+        .filter(list -> list.size() == 1)
+        .flatMap(Collection::stream)
+        .collect(toList());
   }
 
   private static class Particle {
@@ -75,6 +94,10 @@ public class Day20 implements DailyProblem<List<String>, Integer> {
 
     private int getNr() {
       return nr;
+    }
+
+    public Point3D getPosition() {
+      return position;
     }
 
     private long getManhattanDistanceToOrigin() {
