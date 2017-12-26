@@ -27,10 +27,9 @@ public class Day17Test extends DailyTest {
   }
 
   @Override
-  @Ignore
+  @Ignore("No test input solution given...")
   @Test
   public void validateSecondSampleInputs() {
-    // No test input solution given...
   }
 
   @Override

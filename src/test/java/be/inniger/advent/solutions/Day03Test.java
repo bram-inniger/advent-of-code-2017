@@ -3,6 +3,7 @@ package be.inniger.advent.solutions;
 import static be.inniger.advent.util.InputFileReader.readSingleLine;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import be.inniger.advent.DailyTest;
@@ -35,23 +36,23 @@ public class Day03Test extends DailyTest {
   }
 
   @Override
+  @Ignore("These don't make sense, as the actual method calculates the next value surpassing the given input")
   @Test
   public void validateSecondSampleInputs() {
-    // These don't make sense, as the actual method calculates the next value surpassing the given input
-//    assertThat(problem.solveSecond(1))
-//        .isEqualTo(1);
-//
-//    assertThat(problem.solveSecond(2))
-//        .isEqualTo(1);
-//
-//    assertThat(problem.solveSecond(3))
-//        .isEqualTo(2);
-//
-//    assertThat(problem.solveSecond(4))
-//        .isEqualTo(4);
-//
-//    assertThat(problem.solveSecond(5))
-//        .isEqualTo(5);
+    assertThat(problem.solveSecond(1))
+        .isEqualTo(1);
+
+    assertThat(problem.solveSecond(2))
+        .isEqualTo(1);
+
+    assertThat(problem.solveSecond(3))
+        .isEqualTo(2);
+
+    assertThat(problem.solveSecond(4))
+        .isEqualTo(4);
+
+    assertThat(problem.solveSecond(5))
+        .isEqualTo(5);
   }
 
   @Override

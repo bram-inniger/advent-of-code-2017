@@ -15,9 +15,8 @@ public class Day16Test extends DailyTest {
 
   private final Day16 problem = new Day16();
 
-  // Test input expects only 5 programs to be present instead of 15
   @Override
-  @Ignore
+  @Ignore("Test input expects only 5 programs to be present instead of 15")
   @Test
   public void validateFirstSampleInputs() {
     assertThat(problem.solveFirst(asList(
@@ -36,9 +35,9 @@ public class Day16Test extends DailyTest {
   }
 
   @Override
+  @Ignore("No test input solution given...")
   @Test
   public void validateSecondSampleInputs() {
-    // No test input solution given...
   }
 
   @Override

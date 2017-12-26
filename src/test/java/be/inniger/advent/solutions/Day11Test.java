@@ -2,16 +2,14 @@ package be.inniger.advent.solutions;
 
 import static be.inniger.advent.util.InputFileReader.readSingleLine;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import be.inniger.advent.DailyTest;
-import be.inniger.advent.util.InputFileReader;
 
 public class Day11Test extends DailyTest {
 
@@ -41,9 +39,9 @@ public class Day11Test extends DailyTest {
   }
 
   @Override
+  @Ignore("No test input solution given...")
   @Test
   public void validateSecondSampleInputs() {
-    // No new sample inputs given
   }
 
   @Override

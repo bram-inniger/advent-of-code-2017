@@ -3,6 +3,7 @@ package be.inniger.advent.solutions;
 import static be.inniger.advent.util.InputFileReader.readSingleLine;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import be.inniger.advent.DailyTest;
@@ -12,11 +13,11 @@ public class Day10Test extends DailyTest {
   private final Day10 problem = new Day10();
 
   @Override
+  @Ignore("Only works if the list-size would be equal to 5")
   @Test
   public void validateFirstSampleInputs() {
-    // Only works if the list-size would be equal to 5
-//    assertThat(problem.solveFirst("3,4,1,5"))
-//        .isEqualTo("12");
+    assertThat(problem.solveFirst("3,4,1,5"))
+        .isEqualTo("12");
   }
 
   @Override
