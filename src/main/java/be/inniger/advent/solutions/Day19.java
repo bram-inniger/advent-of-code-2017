@@ -3,10 +3,10 @@ package be.inniger.advent.solutions;
 import static be.inniger.advent.util.Position.position;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 
 import be.inniger.advent.DailyProblem;
+import be.inniger.advent.util.Direction;
 import be.inniger.advent.util.Position;
 
 public class Day19 implements DailyProblem<List<String>, String> {
@@ -104,21 +104,5 @@ public class Day19 implements DailyProblem<List<String>, String> {
     }
   }
 
-  private enum Direction {
 
-    UP(p -> position(p.getRow() - 1, p.getCol())),
-    RIGHT(p -> position(p.getRow(), p.getCol() + 1)),
-    DOWN(p -> position(p.getRow() + 1, p.getCol())),
-    LEFT(p -> position(p.getRow(), p.getCol() - 1));
-
-    private final Function<Position, Position> nextCalculator;
-
-    Direction(Function<Position, Position> nextCalculator) {
-      this.nextCalculator = nextCalculator;
-    }
-
-    private Position calculateNext(Position position) {
-      return nextCalculator.apply(position);
-    }
-  }
 }
