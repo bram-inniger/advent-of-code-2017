@@ -20,14 +20,17 @@ public class Day21 implements DailyProblem<List<String>, Integer> {
   private static final Pattern RULE = Pattern.compile("^(?<from>.*?) => (?<to>.*?)$");
   private static final Pattern SLASH = Pattern.compile("/");
 
-  private final int nrIterations;
-
-  Day21(int nrIterations) {
-    this.nrIterations = nrIterations;
+  @Override
+  public Integer solveFirst(List<String> inputs) {
+    return solve(inputs, 5);
   }
 
   @Override
-  public Integer solveFirst(List<String> inputs) {
+  public Integer solveSecond(List<String> inputs) {
+    return solve(inputs, 18);
+  }
+
+  private int solve(List<String> inputs, int nrIterations) {
     Map<ArtPattern, ArtPattern> rules = parseRules(inputs);
     ArtPattern pattern = ArtPattern.getStartingPattern();
 
@@ -39,11 +42,6 @@ public class Day21 implements DailyProblem<List<String>, Integer> {
     }
 
     return pattern.getOnPixelsCount();
-  }
-
-  @Override
-  public Integer solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
   }
 
   private Map<ArtPattern, ArtPattern> parseRules(List<String> rules) {

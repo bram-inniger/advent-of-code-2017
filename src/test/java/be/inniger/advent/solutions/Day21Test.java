@@ -11,10 +11,13 @@ import be.inniger.advent.DailyTest;
 
 public class Day21Test extends DailyTest {
 
+  private final Day21 problem = new Day21();
+
   @Override
+  @Ignore("Test input expects only 2 iterations instead of 5")
   @Test
   public void validateFirstSampleInputs() {
-    assertThat(new Day21(2).solveFirst(asList(
+    assertThat(problem.solveFirst(asList(
         "../.# => ##./#../...",
         ".#./..#/### => #..#/..../..../#..#"
     )))
@@ -24,19 +27,20 @@ public class Day21Test extends DailyTest {
   @Override
   @Test
   public void validateFirstSolution() {
-    assertThat(new Day21(5).solveFirst(readMultiLine(FILE_NAME)))
+    assertThat(problem.solveFirst(readMultiLine(FILE_NAME)))
         .isEqualTo(120);
   }
 
   @Override
-  @Ignore
+  @Ignore("No test input solution given...")
   @Test
   public void validateSecondSampleInputs() {
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThat(problem.solveSecond(readMultiLine(FILE_NAME)))
+        .isEqualTo(2204099);
   }
 }
