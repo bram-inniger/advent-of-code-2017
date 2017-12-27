@@ -3,9 +3,10 @@ package be.inniger.advent.solutions;
 import static be.inniger.advent.util.Direction.UP;
 import static be.inniger.advent.util.Position.position;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.function.UnaryOperator;
 
 import be.inniger.advent.DailyProblem;
 import be.inniger.advent.util.Direction;
@@ -15,75 +16,115 @@ public class Day22 implements DailyProblem<List<String>, Integer> {
 
   @Override
   public Integer solveFirst(List<String> inputs) {
-    Set<Position> infected = getInitialState(inputs);
+    return solve(inputs, 10_000, status -> {
+      switch (status) {
+        case CLEAN:
+          return Status.INFECTED;
+        case INFECTED:
+          return Status.CLEAN;
+        case WEAKENED:
+        case FLAGGED:
+        default:
+          throw new IllegalArgumentException();
+      }
+    });
+  }
+
+  @Override
+  public Integer solveSecond(List<String> inputs) {
+    return solve(inputs, 10_000_000, status -> {
+      switch (status) {
+        case CLEAN:
+          return Status.WEAKENED;
+        case WEAKENED:
+          return Status.INFECTED;
+        case INFECTED:
+          return Status.FLAGGED;
+        case FLAGGED:
+          return Status.CLEAN;
+        default:
+          throw new IllegalArgumentException();
+      }
+    });
+  }
+
+  public int solve(List<String> inputs, int nrIterations, UnaryOperator<Status> statusChanger) {
+    Map<Position, Status> grid = getInitialState(inputs);
     int infectedCount = 0;
 
     Position virusPosition = position(0, 0);
     Direction virusDirection = UP;
 
-    for (int i = 0; i < 10_000; i++) {
-      if (infected.contains(virusPosition)) {
-        virusDirection = virusDirection.rotateClockWise();
-        infected.remove(virusPosition);
-      }
-      else {
-        virusDirection = virusDirection.rotateCounterClockWise();
-        infected.add(virusPosition);
+    for (int i = 0; i < nrIterations; i++) {
+      Status oldStatus = grid.getOrDefault(virusPosition, Status.CLEAN);
+      Status newStatus = statusChanger.apply(oldStatus);
+      grid.put(virusPosition, newStatus);
+
+      if (newStatus == Status.INFECTED) {
         infectedCount++;
       }
 
+      virusDirection = getNewDirection(virusDirection, oldStatus);
       virusPosition = virusDirection.calculateNext(virusPosition);
     }
 
     return infectedCount;
   }
 
-  @Override
-  public Integer solveSecond(List<String> input) {
-    throw new UnsupportedOperationException();
-  }
-
-  private Set<Position> getInitialState(List<String> inputs) {
-    Set<Position> infected = new HashSet<>();
+  private Map<Position, Status> getInitialState(List<String> inputs) {
+    Map<Position, Status> grid = new HashMap<>();
     int coordinatesOffset = inputs.size() / 2;
 
     for (int row = 0; row < inputs.size(); row++) {
       char[] input = inputs.get(row).toCharArray();
 
       for (int col = 0; col < input.length; col++) {
-        if (input[col] == '#') {
-          infected.add(position(row - coordinatesOffset, col - coordinatesOffset));
+        Position node = position(row - coordinatesOffset, col - coordinatesOffset);
+
+        switch (input[col]) {
+          case '.':
+            grid.put(node, Status.CLEAN);
+            break;
+          case '#':
+            grid.put(node, Status.INFECTED);
+            break;
+          case 'W':
+            grid.put(node, Status.WEAKENED);
+            break;
+          case 'F':
+            grid.put(node, Status.FLAGGED);
+            break;
         }
       }
     }
-    return infected;
+
+    return grid;
   }
 
-  // TODO - Remove after finishing part 2
-  private void prettyPrint(Set<Position> infected, Position virusPosition, Direction virusDirection) {
-    StringBuilder sb = new StringBuilder();
-
-    for (int row = -4; row <= 4; row++) {
-      for (int col = -4; col <= 4; col++) {
-        sb
-            .append(virusPosition.getRow() == row && virusPosition.getCol() == col ?
-                '[' :
-                ' '
-            )
-            .append(infected.contains(position(row, col)) ?
-                '#' :
-                '.'
-            )
-            .append(virusPosition.getRow() == row && virusPosition.getCol() == col ?
-                ']' :
-                ' '
-            );
-      }
-
-      sb.append("\n");
+  private Direction getNewDirection(Direction virusDirection, Status oldStatus) {
+    switch (oldStatus) {
+      case CLEAN:
+        virusDirection = virusDirection.rotateCounterClockWise();
+        break;
+      case INFECTED:
+        virusDirection = virusDirection.rotateClockWise();
+        break;
+      case WEAKENED:
+        break;
+      case FLAGGED:
+        virusDirection = virusDirection.reverse();
+        break;
+      default:
+        throw new IllegalArgumentException();
     }
+    return virusDirection;
+  }
 
-    System.out.println(sb);
-    System.out.println(virusDirection);
+  private enum Status {
+
+    CLEAN,
+    INFECTED,
+    WEAKENED,
+    FLAGGED
   }
 }
