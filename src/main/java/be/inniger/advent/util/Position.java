@@ -50,4 +50,12 @@ public final class Position {
         .append(col)
         .toHashCode();
   }
+
+  @Override
+  public String toString() {
+    return "Position{" +
+        "row=" + row +
+        ", col=" + col +
+        '}';
+  }
 }

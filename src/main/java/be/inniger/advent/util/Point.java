@@ -50,4 +50,12 @@ public final class Point {
         .append(y)
         .toHashCode();
   }
+
+  @Override
+  public String toString() {
+    return "Point{" +
+        "x=" + x +
+        ", y=" + y +
+        '}';
+  }
 }

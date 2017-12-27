@@ -70,4 +70,13 @@ public final class Point3D {
         .append(z)
         .toHashCode();
   }
+
+  @Override
+  public String toString() {
+    return "Point3D{" +
+        "x=" + x +
+        ", y=" + y +
+        ", z=" + z +
+        '}';
+  }
 }
