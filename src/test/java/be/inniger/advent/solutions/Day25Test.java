@@ -2,6 +2,7 @@ package be.inniger.advent.solutions;
 
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -26,14 +27,15 @@ public class Day25Test extends DailyTest {
   }
 
   @Override
-  @Ignore
+  @Ignore("Part 2 did not involve coding")
   @Test
   public void validateSecondSampleInputs() {
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThatThrownBy(() -> problem.solveSecond(emptyList()))
+        .isInstanceOf(UnsupportedOperationException.class);
   }
 }
