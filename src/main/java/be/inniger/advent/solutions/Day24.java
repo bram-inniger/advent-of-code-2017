@@ -3,6 +3,7 @@ package be.inniger.advent.solutions;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,27 +18,33 @@ public class Day24 implements DailyProblem<List<String>, Integer> {
 
   @Override
   public Integer solveFirst(List<String> inputs) {
+    return solve(inputs, comparing(Chain::getStrength));
+  }
+
+  @Override
+  public Integer solveSecond(List<String> inputs) {
+    return solve(inputs, comparing(Chain::getLength).thenComparing(Chain::getStrength));
+  }
+
+  private int solve(List<String> inputs, Comparator<Chain> comparator) {
     List<Component> components = inputs.stream()
         .map(this::parseInput)
         .collect(toList());
 
     return components.stream()
         .filter(component -> component.nrPortsLeft == 0 || component.nrPortsRight == 0)
-        .mapToInt(component -> getStrongestChain(Chain.newChain(component), copyAndRemove(components, component)).strength)
-        .max()
+        .map(component -> getBestChain(Chain.newChain(component), copyAndRemove(components, component), comparator))
+        .sorted(comparator.reversed())
+        .map(Chain::getStrength)
+        .findFirst()
         .orElseThrow(IllegalArgumentException::new);
   }
 
-  @Override
-  public Integer solveSecond(List<String> inputs) {
-    throw new UnsupportedOperationException();
-  }
-
-  private Chain getStrongestChain(Chain seen, List<Component> toSee) {
+  private Chain getBestChain(Chain seen, List<Component> toSee, Comparator<Chain> comparator) {
     return toSee.stream()
         .flatMap(component -> seen.connectComponent(component).stream()
-            .map(chain -> getStrongestChain(chain, copyAndRemove(toSee, component))))
-        .max(comparing(Chain::getStrength))
+            .map(chain -> getBestChain(chain, copyAndRemove(toSee, component), comparator)))
+        .max(comparator)
         .orElse(seen);
   }
 
@@ -76,16 +83,18 @@ public class Day24 implements DailyProblem<List<String>, Integer> {
 
     private final int nrPortsRight;
     private final int strength;
+    private final int length;
 
-    private Chain(int nrPortsRight, int strength) {
+    private Chain(int nrPortsRight, int strength, int length) {
       this.nrPortsRight = nrPortsRight;
       this.strength = strength;
+      this.length = length;
     }
 
     private static Chain newChain(Component toStart) {
       return Stream.of(toStart, toStart.swap())
           .filter(component -> component.nrPortsLeft == 0)
-          .map(component -> new Chain(component.nrPortsRight, component.nrPortsRight))
+          .map(component -> new Chain(component.nrPortsRight, component.nrPortsRight, 1))
           .findFirst()
           .orElseThrow(IllegalArgumentException::new);
     }
@@ -93,12 +102,16 @@ public class Day24 implements DailyProblem<List<String>, Integer> {
     private List<Chain> connectComponent(Component toConnect) {
       return Stream.of(toConnect, toConnect.swap())
           .filter(component -> this.nrPortsRight == component.nrPortsLeft)
-          .map(component -> new Chain(component.nrPortsRight, this.strength + component.nrPortsLeft + component.nrPortsRight))
+          .map(component -> new Chain(component.nrPortsRight, this.strength + component.nrPortsLeft + component.nrPortsRight, this.length + 1))
           .collect(toList());
     }
 
     private int getStrength() {
       return strength;
+    }
+
+    public int getLength() {
+      return length;
     }
   }
 }

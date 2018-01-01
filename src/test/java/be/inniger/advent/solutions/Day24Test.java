@@ -37,14 +37,25 @@ public class Day24Test extends DailyTest {
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSampleInputs() {
+    assertThat(problem.solveSecond(asList(
+        "0/2",
+        "2/2",
+        "2/3",
+        "3/4",
+        "3/5",
+        "0/1",
+        "10/1",
+        "9/10"
+    )))
+        .isEqualTo(19);
   }
 
   @Override
-  @Ignore
   @Test
   public void validateSecondSolution() {
+    assertThat(problem.solveSecond(readMultiLine(FILE_NAME)))
+        .isEqualTo(1799);
   }
 }
